@@ -5,7 +5,37 @@ import {MdCancel} from 'react-icons/md'
 import './index.css'
 
 class Header extends Component {
+  state = {showHumbugger: false}
+
+  onClickHumbugger = () => {
+    this.setState(prevState => ({showHumbugger: !prevState.showHumbugger}))
+  }
+
+  onClickCancelIcon = () => {
+    this.setState({showHumbugger: false})
+  }
+
+  showMobileNavItems = () => (
+    <ul className="nav-items-container-item-mobile">
+      <li>Home</li>
+      <li>Profile</li>
+      <li>
+        <button className="logout-btn" type="button">
+          Logout
+        </button>
+      </li>
+      <button
+        onClick={this.onClickCancelIcon}
+        type="button"
+        className="cancel-btn"
+      >
+        <MdCancel className="cancel-icon" />
+      </button>
+    </ul>
+  )
+
   render() {
+    const {showHumbugger} = this.state
     return (
       <div>
         <div className="header-logo-container">
@@ -36,22 +66,15 @@ class Header extends Component {
               </button>
             </li>
           </ul>
-          <div className="humbugger-menu">
+          <button
+            type="button"
+            onClick={this.onClickHumbugger}
+            className="humbugger-menu"
+          >
             <GiHamburgerMenu />
-          </div>
-        </div>
-        <ul className="nav-items-container-item-mobile">
-          <li>Home</li>
-          <li>Profile</li>
-          <li>
-            <button className="logout-btn" type="button">
-              Logout
-            </button>
-          </li>
-          <button type="button" className="cancel-btn">
-            <MdCancel className="cancel-icon" />
           </button>
-        </ul>
+        </div>
+        {showHumbugger && this.showMobileNavItems()}
       </div>
     )
   }
