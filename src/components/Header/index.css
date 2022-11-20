@@ -103,3 +103,24 @@
     display: block;
   }
 }
+.nav-items-container-item-mobile {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .nav-items-container-item-mobile {
+    display: block;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px;
+  }
+}
+.cancel-btn {
+  background-color: transparent;
+  border: none;
+  padding-right: 0px;
+}
+.cancel-icon {
+  width: 20px;
+  height: 20px;
+}

@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import {FaSearch} from 'react-icons/fa'
 import {GiHamburgerMenu} from 'react-icons/gi'
+import {MdCancel} from 'react-icons/md'
 import './index.css'
 
 class Header extends Component {
@@ -11,7 +12,7 @@ class Header extends Component {
           <div className="header-logo-container-1">
             <img
               src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1668934317/Standard_Collection_8_ag667t.png"
-              alt="form-logo"
+              alt="website logo"
               className="header-logo-image"
             />
             <h1 className="header-logo-name">Insta Share</h1>
@@ -39,6 +40,18 @@ class Header extends Component {
             <GiHamburgerMenu />
           </div>
         </div>
+        <ul className="nav-items-container-item-mobile">
+          <li>Home</li>
+          <li>Profile</li>
+          <li>
+            <button className="logout-btn" type="button">
+              Logout
+            </button>
+          </li>
+          <button type="button" className="cancel-btn">
+            <MdCancel className="cancel-icon" />
+          </button>
+        </ul>
       </div>
     )
   }
