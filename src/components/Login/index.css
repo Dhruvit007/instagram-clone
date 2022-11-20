@@ -61,12 +61,12 @@
   text-transform: uppercase;
   color: #262626;
   margin-bottom: 8px;
+  margin-top: 24px;
 }
 .input {
   height: 40px;
   background: #eeeeee;
   border-radius: 2px;
-  margin-bottom: 24px;
   border: none;
   padding: 10px;
   font-family: 'Roboto';
@@ -83,4 +83,17 @@
   font-weight: 700;
   font-size: 14px;
   color: #ffffff;
+  margin-top: 24px;
+}
+.error-message {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: 8px;
+
+  /* Light / red / 500 */
+
+  color: #ef4444;
 }
