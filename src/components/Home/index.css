@@ -1,0 +1,8 @@
+.home-contain-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-contain-container-1 {
+  width: 80%;
+}
