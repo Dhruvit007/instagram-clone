@@ -14,7 +14,6 @@ class Home extends Component {
         </div>
         <hr className="hr-line" />
         <Post />
-        <Post />
       </div>
     )
   }

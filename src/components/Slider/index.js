@@ -4,7 +4,6 @@ import Loader from 'react-loader-spinner'
 import {BiError} from 'react-icons/bi'
 import Slider from 'react-slick'
 
-/* Add css to your project */
 import './index.css'
 
 const apiStatusConstant = {
@@ -64,11 +63,14 @@ class ReactSlick extends Component {
     const response = await fetch(apiUrl, apiOptions)
     if (response.ok === true) {
       const data = await response.json()
-      console.log(data)
       this.setState({storyUserData: data, apiStatus: apiStatusConstant.success})
     } else {
       this.setState({apiStatus: apiStatusConstant.failure})
     }
+  }
+
+  onClickRetry = () => {
+    this.fetchStoryData()
   }
 
   renderSliderLoadingView = () => (
@@ -78,10 +80,16 @@ class ReactSlick extends Component {
   )
 
   renderSliderFailureView = () => (
-    <div>
+    <div className="failure-view-container">
       <BiError className="error-icon" />
       <p className="error-msg-view">Somthing Went wrong. Please try again</p>
-      <button type="button">Try Again</button>
+      <button
+        onClick={this.onClickRetry}
+        className="try-again-btn"
+        type="button"
+      >
+        Try Again
+      </button>
     </div>
   )
 
