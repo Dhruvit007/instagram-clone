@@ -1,4 +1,6 @@
 import {Component} from 'react'
+import {withRouter} from 'react-router-dom'
+import Cookies from 'js-cookie'
 import {FaSearch} from 'react-icons/fa'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {MdCancel} from 'react-icons/md'
@@ -15,12 +17,22 @@ class Header extends Component {
     this.setState({showHumbugger: false})
   }
 
+  onClickLogout = () => {
+    Cookies.remove('jwt_token')
+    const {history} = this.props
+    history.replace('/login')
+  }
+
   showMobileNavItems = () => (
     <ul className="nav-items-container-item-mobile">
       <li>Home</li>
       <li>Profile</li>
       <li>
-        <button className="logout-btn" type="button">
+        <button
+          onClick={this.onClickLogout}
+          className="logout-btn"
+          type="button"
+        >
           Logout
         </button>
       </li>
@@ -61,7 +73,11 @@ class Header extends Component {
             <li>Home</li>
             <li>Profile</li>
             <li>
-              <button className="logout-btn" type="button">
+              <button
+                onClick={this.onClickLogout}
+                className="logout-btn"
+                type="button"
+              >
                 Logout
               </button>
             </li>
@@ -80,4 +96,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withRouter(Header)
