@@ -1,61 +1,18 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
+import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
+import {BiError} from 'react-icons/bi'
 import Slider from 'react-slick'
 
 /* Add css to your project */
 import './index.css'
 
-const companyLogosData = [
-  {
-    id: 'd14af630-5d22-4bfb-85dd-bb507b139b82',
-    url:
-      'https://res.cloudinary.com/do4qwwms8/image/upload/v1639475819/Company%20Logos%20/netflix-img_keqbbh.png',
-  },
-  {
-    id: '0a932287-8002-4fc8-95d1-8cbed3224e37',
-    url:
-      'https://res.cloudinary.com/do4qwwms8/image/upload/v1639475818/Company%20Logos%20/facebook-img_fxqbxv.png',
-  },
-  {
-    id: '8211ce0c-d7dc-4d2b-8468-5e48ad9ae985',
-    url:
-      'https://res.cloudinary.com/do4qwwms8/image/upload/v1639475818/Company%20Logos%20/google-img_cnnaol.png',
-  },
-  {
-    id: 'daa48153-3f16-4797-8469-5d63c9cba938',
-    url:
-      'https://res.cloudinary.com/do4qwwms8/image/upload/v1639475818/Company%20Logos%20/zomato-img_gb1k9w.png',
-  },
-  {
-    id: '2f4b518e-29b3-45c3-a7a5-80929f7898d9',
-    url:
-      'https://res.cloudinary.com/do4qwwms8/image/upload/v1639475818/Company%20Logos%20/swiggy-img_jgxg6g.png',
-  },
-  {
-    id: '895b9b4d-a283-4ee1-9fb8-933a3c4b449c',
-    url:
-      'https://res.cloudinary.com/do4qwwms8/image/upload/v1639475818/Company%20Logos%20/amazon-img_yvggab.png',
-  },
-  {
-    id: 'a8c67fd0-bab9-46ec-95de-cbfa2e3473f6',
-    url:
-      'https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png',
-  },
-  {
-    id: 'a8c67fd0-bab9-46ec-95de-cbfa2e3473f6',
-    url:
-      'https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png',
-  },
-  {
-    id: 'a8c67fd0-bab9-46ec-95de-cbfa2e3473f6',
-    url:
-      'https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png',
-  },
-  {
-    id: 'a8c67fd0-bab9-46ec-95de-cbfa2e3473f6',
-    url:
-      'https://assets.ccbp.in/frontend/react-js/instagram-mini-project/stories/instagram-mini-project-story-1-img.png',
-  },
-]
+const apiStatusConstant = {
+  initial: 'INITIAL',
+  inProgress: 'IN_PROGRESS',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+}
 
 const settings = {
   dots: false,
@@ -87,27 +44,91 @@ const settings = {
     },
   ],
 }
-
 class ReactSlick extends Component {
-  renderSlider = () => (
-    <Slider {...settings}>
-      {companyLogosData.map(eachLogo => {
-        const {id, url} = eachLogo
-        return (
-          <div className="slick-item" id="custom-story-style" key={id}>
-            <img className="logo-image" src={url} alt="company logo" />
-            <p className="story-user-name">name</p>
-          </div>
-        )
-      })}
-    </Slider>
+  state = {apiStatus: apiStatusConstant.inProgress, storyUserData: {}}
+
+  componentDidMount() {
+    this.fetchStoryData()
+  }
+
+  fetchStoryData = async () => {
+    this.setState({apiStatus: apiStatusConstant.inProgress})
+    const jwtToken = Cookies.get('jwt_token')
+    const apiOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const apiUrl = 'https://apis.ccbp.in/insta-share/stories'
+    const response = await fetch(apiUrl, apiOptions)
+    if (response.ok === true) {
+      const data = await response.json()
+      console.log(data)
+      this.setState({storyUserData: data, apiStatus: apiStatusConstant.success})
+    } else {
+      this.setState({apiStatus: apiStatusConstant.failure})
+    }
+  }
+
+  renderSliderLoadingView = () => (
+    <div className="loader-container">
+      <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+    </div>
   )
+
+  renderSliderFailureView = () => (
+    <div>
+      <BiError className="error-icon" />
+      <p className="error-msg-view">Somthing Went wrong. Please try again</p>
+      <button type="button">Try Again</button>
+    </div>
+  )
+
+  renderSlider = () => {
+    const {storyUserData} = this.state
+    const userStories = storyUserData.users_stories
+    return (
+      <div className="slick-container">
+        <Slider {...settings}>
+          {userStories.map(eachLogo => (
+            <div
+              className="slick-item"
+              id="custom-story-style"
+              key={eachLogo.user_id}
+            >
+              <div className="image-story-container">
+                <img
+                  className="logo-image"
+                  src={eachLogo.story_url}
+                  alt="company logo"
+                />
+              </div>
+              <p className="story-user-name">{eachLogo.user_name}</p>
+            </div>
+          ))}
+        </Slider>
+      </div>
+    )
+  }
+
+  renderSliderViews = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstant.inProgress:
+        return this.renderSliderLoadingView()
+      case apiStatusConstant.success:
+        return this.renderSlider()
+      case apiStatusConstant.failure:
+        return this.renderSliderFailureView()
+      default:
+        return null
+    }
+  }
 
   render() {
     return (
-      <div className="main-container">
-        <div className="slick-container">{this.renderSlider()}</div>
-      </div>
+      <div className="main-container">{this.renderSliderFailureView()}</div>
     )
   }
 }

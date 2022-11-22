@@ -5,4 +5,15 @@
 }
 .home-contain-container-1 {
   width: 80%;
+  max-width: 1040px;
+}
+.hr-line {
+  width: 100%;
+  height: 0px;
+  border: 0.5px solid #c6c6c8;
+}
+@media screen and (min-width: 767px) {
+  .hr-line {
+    display: none;
+  }
 }
