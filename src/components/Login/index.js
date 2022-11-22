@@ -56,13 +56,13 @@ class Login extends Component {
         <div className="login-contain-container">
           <img
             src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1668933772/OBJECTS_kjufbq.png"
-            alt="login"
+            alt="website login"
             className="login-image"
           />
           <form onSubmit={this.onLogin} className="form-container">
             <img
               src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1668934317/Standard_Collection_8_ag667t.png"
-              alt="form-logo"
+              alt="website logo"
               className="form-logo-image"
             />
             <h1 className="form-name">Insta Share</h1>
@@ -76,7 +76,7 @@ class Login extends Component {
               type="text"
               value={username}
             />
-            <label htmlFor="username" className="label">
+            <label htmlFor="password" className="label">
               PASSWORD
             </label>
             <input

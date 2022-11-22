@@ -44,7 +44,7 @@ const settings = {
   ],
 }
 class ReactSlick extends Component {
-  state = {apiStatus: apiStatusConstant.inProgress, storyUserData: {}}
+  state = {apiStatus: apiStatusConstant.initial, storyUserData: {}}
 
   componentDidMount() {
     this.fetchStoryData()
@@ -135,9 +135,7 @@ class ReactSlick extends Component {
   }
 
   render() {
-    return (
-      <div className="main-container">{this.renderSliderFailureView()}</div>
-    )
+    return <div className="main-container">{this.renderSliderViews()}</div>
   }
 }
 
