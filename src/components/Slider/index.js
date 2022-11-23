@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {BiError} from 'react-icons/bi'
 import Slider from 'react-slick'
 
 import './index.css'
@@ -81,8 +80,12 @@ class ReactSlick extends Component {
 
   renderSliderFailureView = () => (
     <div className="failure-view-container">
-      <BiError className="error-icon" />
-      <p className="error-msg-view">Somthing Went wrong. Please try again</p>
+      {/* <BiError className="error-icon" /> */}
+      <img
+        src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1669180760/Group_7522_y0smlp.png"
+        alt="failure view"
+      />
+      <p className="error-msg-view">Something Went wrong. Please try again</p>
       <button
         onClick={this.onClickRetry}
         className="try-again-btn"
@@ -97,10 +100,10 @@ class ReactSlick extends Component {
     const {storyUserData} = this.state
     const userStories = storyUserData.users_stories
     return (
-      <div className="slick-container">
+      <ul className="slick-container">
         <Slider {...settings}>
           {userStories.map(eachLogo => (
-            <div
+            <li
               className="slick-item"
               id="custom-story-style"
               key={eachLogo.user_id}
@@ -109,14 +112,14 @@ class ReactSlick extends Component {
                 <img
                   className="logo-image"
                   src={eachLogo.story_url}
-                  alt="company logo"
+                  alt="user story"
                 />
               </div>
               <p className="story-user-name">{eachLogo.user_name}</p>
-            </div>
+            </li>
           ))}
         </Slider>
-      </div>
+      </ul>
     )
   }
 

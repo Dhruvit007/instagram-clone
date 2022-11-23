@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {BiError} from 'react-icons/bi'
 import EachPost from '../EachPost'
 import './index.css'
 
@@ -65,17 +64,21 @@ class Post extends Component {
       userName: eachPostData.user_name,
     }))
     return (
-      <>
+      <ul className="post-list-item-container">
         {updatedPostData.map(eachPost => (
           <EachPost key={eachPost.postId} eachPost={eachPost} />
         ))}
-      </>
+      </ul>
     )
   }
 
   renderPostFailureView = () => (
     <div className="failure-view-container-2">
-      <BiError className="error-icon" />
+      {/* <BiError className="error-icon" /> */}
+      <img
+        src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1669180760/Group_7522_y0smlp.png"
+        alt="failure view"
+      />
       <p className="error-msg-view">Something Went wrong. Please try again</p>
       <button
         onClick={this.onClickRetry}

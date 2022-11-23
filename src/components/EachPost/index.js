@@ -77,22 +77,34 @@ class EachPost extends Component {
     const {likeCount} = this.state
     const {isLiked} = this.state
     return (
-      <div className="post-container">
+      <li className="post-container">
         <div className="profile-pic-name-container">
           <div className="profile-pic-container">
-            <img src={profilePic} alt="hhh" className="profile-pic" />
+            <img
+              src={profilePic}
+              alt="post author profile"
+              className="profile-pic"
+            />
           </div>
           <p className="person-name">{userName}</p>
         </div>
-        <img src={postDetails.image_url} alt="yyz" className="post-photo" />
+        <img src={postDetails.image_url} alt="post" className="post-photo" />
         <div className="about-post-container">
           <div className="reaction-container">
             {isLiked ? (
-              <button onClick={this.postUnLikeApiCall} type="button">
+              <button
+                className="like-icon"
+                onClick={this.postUnLikeApiCall}
+                type="button"
+              >
                 <FcLike />
               </button>
             ) : (
-              <button onClick={this.postLikeApiCall} type="button">
+              <button
+                className="like-icon"
+                onClick={this.postLikeApiCall}
+                type="button"
+              >
                 <BsHeart />
               </button>
             )}
@@ -103,15 +115,15 @@ class EachPost extends Component {
           <p className="likes-count">{likeCount} likes</p>
           <p className="post-caption">{postDetails.caption}</p>
           {comments.map(eachComment => (
-            <p className="comment-details" key={eachComment.user_name}>
-              {eachComment.user_name}
-              <span className="comment">{eachComment.comment}</span>
+            <p className="comment" key={eachComment.user_name}>
+              <span className="comment-details"> {eachComment.user_name}</span>
+              {eachComment.comment}
             </p>
           ))}
 
           <p className="post-time">{createdAt}</p>
         </div>
-      </div>
+      </li>
     )
   }
 }
