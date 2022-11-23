@@ -1,103 +1,72 @@
 import {BsGrid3X3} from 'react-icons/bs'
-import Header from '../Header'
 import './index.css'
 
 const Profile = props => {
   const {myProfileData} = props
+  const {stories, posts} = myProfileData
   return (
     <>
       <div className="profile-contain-container-1">
+        <h1 className="username-sm-view">Rahul</h1>
         <div className="profile-stats-container">
           <img
-            src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/users/instagram-mini-project-user-4-img.png"
-            alt="uuu"
-            className="profile-pic"
+            src={myProfileData.profile_pic}
+            alt="my profile"
+            className="profile-pic-1"
           />
           <div>
-            <h1 className="profile-details-user-name">Rahul</h1>
+            <h1 className="profile-details-user-name">
+              {myProfileData.user_name}
+            </h1>
             <ul className="user-stats">
               <li className="each-stats">
-                79 <span className="stats-label">posts</span>
+                {myProfileData.posts_count}
+                <span className="stats-label"> posts</span>
               </li>
               <li className="each-stats">
-                379 <span className="stats-label">followers</span>
+                {myProfileData.followers_count}
+                <span className="stats-label"> followers</span>
               </li>
               <li className="each-stats">
-                179 <span className="stats-label">following</span>
+                {myProfileData.following_count}
+                <span className="stats-label"> following</span>
               </li>
             </ul>
-            <p className="small-name">Rahul</p>
-            <p className="about">
-              It is not strongest species that survive, nor the most
-              intteligent, but one of most <br /> responsible change
-            </p>
+            <p className="small-name">{myProfileData.user_id}</p>
+            <p className="about">{myProfileData.user_bio}</p>
           </div>
         </div>
         <div className="profile-about-sm-view-1">
-          <p className="small-name-1">Rahul</p>
-          <p className="about-1">
-            It is not strongest species that survive, nor the most intteligent,
-            but one of most responsible change
-          </p>
+          <p className="small-name-1">{myProfileData.user_id}</p>
+          <p className="about-1">{myProfileData.user_bio}</p>
         </div>
         <ul className="my-profile-story-item-container">
-          <li className="profile-story-item">
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/previous-stories/instagram-mini-project-previous-story-10-img.png"
-              alt="xxx"
-              className="profile-story-image"
-            />
-          </li>
-          <li className="profile-story-item">
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/previous-stories/instagram-mini-project-previous-story-10-img.png"
-              alt="xxx"
-              className="profile-story-image"
-            />
-          </li>
-          <li className="profile-story-item">
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/previous-stories/instagram-mini-project-previous-story-10-img.png"
-              alt="xxx"
-              className="profile-story-image"
-            />
-          </li>
+          {stories.map(eachStory => (
+            <li className="profile-story-item" key={eachStory.id}>
+              <img
+                src={eachStory.image}
+                alt="my story"
+                className="profile-story-image"
+              />
+            </li>
+          ))}
         </ul>
       </div>
       <hr className="hr-line-1" />
       <div className="user-post-heading-container">
         <BsGrid3X3 className="grid-icon" />
-        <p className="post-grid-title">POSTS</p>
+        <h1 className="post-grid-title">POSTS</h1>
       </div>
       <ul className="user-profile-post-container">
-        <li className="each-post-item">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-31-img.png"
-            alt="lll"
-            className="user-profile-post-image"
-          />
-        </li>
-        <li className="each-post-item">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-31-img.png"
-            alt="lll"
-            className="user-profile-post-image"
-          />
-        </li>
-        <li className="each-post-item">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-31-img.png"
-            alt="lll"
-            className="user-profile-post-image"
-          />
-        </li>
-        <li className="each-post-item">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/instagram-mini-project/posts/instagram-mini-project-post-31-img.png"
-            alt="lll"
-            className="user-profile-post-image"
-          />
-        </li>
+        {posts.map(eachPost => (
+          <li className="each-post-item" key={eachPost.id}>
+            <img
+              src={eachPost.image}
+              alt="my post"
+              className="user-profile-post-image"
+            />
+          </li>
+        ))}
       </ul>
     </>
   )

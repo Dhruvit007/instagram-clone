@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import {FaSearch} from 'react-icons/fa'
 import {GiHamburgerMenu} from 'react-icons/gi'
@@ -25,8 +25,12 @@ class Header extends Component {
 
   showMobileNavItems = () => (
     <ul className="nav-items-container-item-mobile">
-      <li>Home</li>
-      <li>Profile</li>
+      <Link to="/" className="nav-link-mobile">
+        <li>Home</li>
+      </Link>
+      <Link to="/my-profile" className="nav-link-mobile">
+        <li>Profile</li>
+      </Link>
       <li>
         <button
           onClick={this.onClickLogout}
@@ -70,8 +74,12 @@ class Header extends Component {
                 <FaSearch className="search-icon" />
               </div>
             </div>
-            <li>Home</li>
-            <li>Profile</li>
+            <Link to="/" className="nav-link">
+              <li>Home</li>
+            </Link>
+            <Link to="/my-profile" className="nav-link">
+              <li>Profile</li>
+            </Link>
             <li>
               <button
                 onClick={this.onClickLogout}

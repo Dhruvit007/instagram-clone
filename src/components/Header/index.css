@@ -19,8 +19,6 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
-  /* identical to box height, or 120% */
-
   color: #262626;
 }
 .header-logo-image {
@@ -125,4 +123,25 @@
 .cancel-icon {
   width: 20px;
   height: 20px;
+}
+.nav-link {
+  text-decoration: none;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #262626;
+}
+.nav-link-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #262626;
 }

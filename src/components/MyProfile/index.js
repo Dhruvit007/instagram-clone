@@ -43,7 +43,7 @@ class MyProfile extends Component {
   }
 
   renderMyProfileLoadingView = () => (
-    <div className="loader-container profile-loading">
+    <div className="loader-container profile-loading" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
