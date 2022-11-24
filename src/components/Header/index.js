@@ -68,7 +68,7 @@ class Header extends Component {
               <input
                 placeholder="Search Caption"
                 className="search-caption"
-                type="text"
+                type="search"
               />
               <div className="search-icon-container">
                 <FaSearch className="search-icon" />

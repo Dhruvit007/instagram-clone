@@ -2,7 +2,7 @@ import {BsGrid3X3} from 'react-icons/bs'
 import {BiCamera} from 'react-icons/bi'
 import './index.css'
 
-const Profile = props => {
+const EachUserProfile = props => {
   const {myProfileData} = props
   console.log(myProfileData)
   const {stories, posts} = myProfileData
@@ -21,7 +21,7 @@ const Profile = props => {
         <div className="profile-stats-container">
           <img
             src={myProfileData.profile_pic}
-            alt="my profile"
+            alt="user profile"
             className="profile-pic-1"
           />
           <div>
@@ -55,7 +55,7 @@ const Profile = props => {
             <li className="profile-story-item" key={eachStory.id}>
               <img
                 src={eachStory.image}
-                alt="my story"
+                alt="user story"
                 className="profile-story-image"
               />
             </li>
@@ -75,7 +75,7 @@ const Profile = props => {
             <li className="each-post-item" key={eachPost.id}>
               <img
                 src={eachPost.image}
-                alt="my post"
+                alt="user post"
                 className="user-profile-post-image"
               />
             </li>
@@ -86,4 +86,4 @@ const Profile = props => {
   )
 }
 
-export default Profile
+export default EachUserProfile

@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import {BsHeart} from 'react-icons/bs'
 import {FcLike} from 'react-icons/fc'
@@ -73,11 +74,18 @@ class EachPost extends Component {
 
   render() {
     const {eachPost} = this.props
-    const {comments, createdAt, postDetails, profilePic, userName} = eachPost
+    const {
+      comments,
+      createdAt,
+      postDetails,
+      profilePic,
+      userName,
+      userId,
+    } = eachPost
     const {likeCount} = this.state
     const {isLiked} = this.state
     return (
-      <li className="post-container" testid="postItem">
+      <li className="post-container" testid="post-item">
         <div className="profile-pic-name-container">
           <div className="profile-pic-container">
             <img
@@ -86,7 +94,9 @@ class EachPost extends Component {
               className="profile-pic"
             />
           </div>
-          <p className="person-name">{userName}</p>
+          <Link to={`/users/${userId}`}>
+            <p className="person-name">{userName}</p>
+          </Link>
         </div>
         <img src={postDetails.image_url} alt="post" className="post-photo" />
         <div className="about-post-container">

@@ -1,0 +1,24 @@
+.failure-view-container-my-profile {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 90vh;
+}
+
+.failure-view-image {
+  width: 560px;
+  height: 274px;
+}
+@media screen and (max-width: 767px) {
+  .failure-view-image {
+    width: 190px;
+    height: 127px;
+  }
+}
+.profile-loading {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 70vh;
+}
