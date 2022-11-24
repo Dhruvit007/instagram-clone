@@ -85,7 +85,7 @@ class EachPost extends Component {
     const {likeCount} = this.state
     const {isLiked} = this.state
     return (
-      <li className="post-container" testid="post-item">
+      <li className="post-container">
         <div className="profile-pic-name-container">
           <div className="profile-pic-container">
             <img
@@ -106,7 +106,7 @@ class EachPost extends Component {
                 className="like-icon"
                 onClick={this.postUnLikeApiCall}
                 type="button"
-                testid="unLikeIcon"
+                // testid="unLikeIcon"
               >
                 <FcLike />
               </button>
@@ -115,7 +115,7 @@ class EachPost extends Component {
                 className="like-icon"
                 onClick={this.postLikeApiCall}
                 type="button"
-                testid="likeIcon"
+                // testid="likeIcon"
               >
                 <BsHeart />
               </button>

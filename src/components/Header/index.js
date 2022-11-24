@@ -7,7 +7,7 @@ import {MdCancel} from 'react-icons/md'
 import './index.css'
 
 class Header extends Component {
-  state = {showHumbugger: false}
+  state = {showHumbugger: false, searchInput: ''}
 
   onClickHumbugger = () => {
     this.setState(prevState => ({showHumbugger: !prevState.showHumbugger}))
@@ -17,10 +17,20 @@ class Header extends Component {
     this.setState({showHumbugger: false})
   }
 
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
   onClickLogout = () => {
     Cookies.remove('jwt_token')
     const {history} = this.props
     history.replace('/login')
+  }
+
+  onClickSearch = () => {
+    const {onClickSearchIcon} = this.props
+    const {searchInput} = this.state
+    onClickSearchIcon(searchInput)
   }
 
   showMobileNavItems = () => (
@@ -52,6 +62,8 @@ class Header extends Component {
 
   render() {
     const {showHumbugger} = this.state
+    const {searchInput} = this.state
+
     return (
       <div>
         <div className="header-logo-container">
@@ -69,9 +81,14 @@ class Header extends Component {
                 placeholder="Search Caption"
                 className="search-caption"
                 type="search"
+                value={searchInput}
+                onChange={this.onChangeSearchInput}
               />
               <div className="search-icon-container">
-                <FaSearch className="search-icon" />
+                <FaSearch
+                  onClick={this.onClickSearch}
+                  className="search-icon"
+                />
               </div>
             </div>
             <Link to="/" className="nav-link">
