@@ -74,6 +74,7 @@ class EachPost extends Component {
 
   render() {
     const {eachPost} = this.props
+    console.log(eachPost)
     const {
       comments,
       createdAt,
@@ -106,7 +107,7 @@ class EachPost extends Component {
                 className="like-icon"
                 onClick={this.postUnLikeApiCall}
                 type="button"
-                // testid="unLikeIcon"
+                testid="unLikeIcon"
               >
                 <FcLike />
               </button>
@@ -115,7 +116,7 @@ class EachPost extends Component {
                 className="like-icon"
                 onClick={this.postLikeApiCall}
                 type="button"
-                // testid="likeIcon"
+                testid="likeIcon"
               >
                 <BsHeart />
               </button>

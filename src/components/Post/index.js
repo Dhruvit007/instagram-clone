@@ -22,7 +22,6 @@ class Post extends Component {
   }
 
   fetchPostData = async () => {
-    const {searchInput} = this.props
     this.setState({apiStatus: apiStatusConstant.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const apiOptions = {
@@ -31,8 +30,7 @@ class Post extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
-    console.log(apiUrl)
+    const apiUrl = 'https://apis.ccbp.in/insta-share/posts'
     const response = await fetch(apiUrl, apiOptions)
     if (response.ok === true) {
       const data = await response.json()
@@ -51,7 +49,7 @@ class Post extends Component {
   }
 
   renderPostLoadingView = () => (
-    <div className="loader-container">
+    <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )

@@ -3,9 +3,6 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import EachPost from '../EachPost'
-
-import Header from '../Header'
-import ReactSlick from '../Slider'
 import './index.css'
 
 const apiStatusConstant = {
@@ -15,10 +12,8 @@ const apiStatusConstant = {
   failure: 'FAILURE',
 }
 
-class Home extends Component {
+class SearchComponent extends Component {
   state = {
-    searchInputHome: '',
-    isSearching: false,
     apiStatus: apiStatusConstant.initial,
     postUserData: [],
   }
@@ -28,7 +23,7 @@ class Home extends Component {
   }
 
   fetchPostData = async () => {
-    const {searchInputHome} = this.state
+    const {searchInputHome} = this.props
     console.log(searchInputHome)
     this.setState({apiStatus: apiStatusConstant.inProgress})
     const jwtToken = Cookies.get('jwt_token')
@@ -57,7 +52,7 @@ class Home extends Component {
   }
 
   renderPostLoadingView = () => (
-    <div className="loader-container" testid="loader">
+    <div className="loader-container">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
@@ -130,32 +125,9 @@ class Home extends Component {
     }
   }
 
-  onClickSearchIcon = searchInput => {
-    let searchingStatus
-    if (searchInput === '') {
-      searchingStatus = false
-    } else {
-      searchingStatus = true
-    }
-    this.setState(
-      {searchInputHome: searchInput, isSearching: searchingStatus},
-      this.fetchPostData,
-    )
-  }
-
   render() {
-    const {isSearching} = this.state
-    return (
-      <div className="home-contain-container">
-        <div className="home-contain-container-1">
-          <Header onClickSearchIcon={this.onClickSearchIcon} />
-          {!isSearching && <ReactSlick />}
-        </div>
-        <hr className="hr-line" />
-        <div className="post-container-1">{this.renderPostViews()}</div>
-      </div>
-    )
+    return <div className="post-container-1">{this.renderPostViews()}</div>
   }
 }
 
-export default Home
+export default SearchComponent

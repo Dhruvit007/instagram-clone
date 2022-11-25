@@ -17,6 +17,14 @@ class Header extends Component {
     this.setState({showHumbugger: false})
   }
 
+  performSearchAction = () => {
+    const {searchInput} = this.state
+    const {onClickSearchIcon} = this.props
+    if (onClickSearchIcon !== undefined) {
+      onClickSearchIcon(searchInput)
+    }
+  }
+
   onChangeSearchInput = event => {
     this.setState({searchInput: event.target.value})
   }
@@ -30,35 +38,48 @@ class Header extends Component {
   onClickSearch = () => {
     const {onClickSearchIcon} = this.props
     const {searchInput} = this.state
-    onClickSearchIcon(searchInput)
+    if (onClickSearchIcon !== undefined) {
+      onClickSearchIcon(searchInput)
+    }
   }
 
-  showMobileNavItems = () => (
-    <ul className="nav-items-container-item-mobile">
-      <Link to="/" className="nav-link-mobile">
-        <li>Home</li>
-      </Link>
-      <Link to="/my-profile" className="nav-link-mobile">
-        <li>Profile</li>
-      </Link>
-      <li>
+  showMobileNavItems = () => {
+    const {searchInput} = this.state
+
+    return (
+      <ul className="nav-items-container-item-mobile">
+        <Link to="/" className="nav-link-mobile">
+          <li>Home</li>
+        </Link>
+        <Link to="/my-profile" className="nav-link-mobile">
+          <li>Profile</li>
+        </Link>
+        <li>
+          <button
+            onClick={this.onClickLogout}
+            className="logout-btn"
+            type="button"
+          >
+            Logout
+          </button>
+        </li>
+        <input
+          placeholder="Search Caption"
+          className="search-caption"
+          type="search"
+          value={searchInput}
+          onChange={this.onChangeSearchInput}
+        />
         <button
-          onClick={this.onClickLogout}
-          className="logout-btn"
+          onClick={this.onClickCancelIcon}
           type="button"
+          className="cancel-btn"
         >
-          Logout
+          <MdCancel className="cancel-icon" />
         </button>
-      </li>
-      <button
-        onClick={this.onClickCancelIcon}
-        type="button"
-        className="cancel-btn"
-      >
-        <MdCancel className="cancel-icon" />
-      </button>
-    </ul>
-  )
+      </ul>
+    )
+  }
 
   render() {
     const {showHumbugger} = this.state
@@ -68,11 +89,13 @@ class Header extends Component {
       <div>
         <div className="header-logo-container">
           <div className="header-logo-container-1">
-            <img
-              src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1668934317/Standard_Collection_8_ag667t.png"
-              alt="website logo"
-              className="header-logo-image"
-            />
+            <Link to="/">
+              <img
+                src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1668934317/Standard_Collection_8_ag667t.png"
+                alt="website logo"
+                className="header-logo-image"
+              />
+            </Link>
             <h1 className="header-logo-name">Insta Share</h1>
           </div>
           <ul className="nav-items-container">
@@ -85,10 +108,12 @@ class Header extends Component {
                 onChange={this.onChangeSearchInput}
               />
               <div className="search-icon-container">
-                <FaSearch
-                  onClick={this.onClickSearch}
-                  className="search-icon"
-                />
+                <button type="button" testid="searchIcon">
+                  <FaSearch
+                    onClick={this.onClickSearch}
+                    className="search-icon"
+                  />
+                </button>
               </div>
             </div>
             <Link to="/" className="nav-link">
