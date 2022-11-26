@@ -26,7 +26,7 @@ class Header extends Component {
   }
 
   onChangeSearchInput = event => {
-    this.setState({searchInput: event.target.value})
+    this.setState({searchInput: event.target.value}, this.performSearchAction)
   }
 
   onClickLogout = () => {

@@ -64,7 +64,6 @@ class EachPost extends Component {
     const response = await fetch(postLikeApi, option)
     if (response.ok === true) {
       const data = await response.json()
-      console.log(data)
       this.setState(prevState => ({
         likeCount: prevState.likeCount - 1,
         isLiked: false,
