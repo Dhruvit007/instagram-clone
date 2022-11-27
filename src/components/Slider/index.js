@@ -1,7 +1,7 @@
 import {Component} from 'react'
-import Cookies from 'js-cookie'
-import Loader from 'react-loader-spinner'
 import Slider from 'react-slick'
+import Cookies from 'js-cookie'
+import LoaderComponent from '../LoaderComponent'
 
 import './index.css'
 
@@ -73,9 +73,10 @@ class ReactSlick extends Component {
   }
 
   renderSliderLoadingView = () => (
-    <div className="loader-container" testid="loader">
-      <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
-    </div>
+    // <div className="loader-container" testid="loader">
+    //   <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+    // </div>
+    <LoaderComponent />
   )
 
   renderSliderFailureView = () => (

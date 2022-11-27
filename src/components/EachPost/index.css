@@ -15,20 +15,10 @@
   }
 }
 .profile-pic-container {
-  border: 1.03px solid;
-  border-image-source: linear-gradient(
-    314.35deg,
-    #e20337 6.03%,
-    #c60188 40.88%,
-    #7700c3 73.23%
-  );
-  /* border: 1px solid transparent;
-  border-image: linear-gradient(45deg, red, yellow); */
-  border-image-slice: 1;
-  height: 120px;
-  border-radius: 10px;
-  width: 32px;
-  height: 32px;
+  border: 2px solid #e20337;
+  border-radius: 60px;
+  width: 52px;
+  height: 52px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,9 +30,9 @@
   padding-bottom: 13px;
 }
 .profile-pic {
-  width: 28px;
-  height: 28px;
-  border-radius: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 30px;
 }
 .person-name {
   font-family: 'Roboto';
@@ -117,4 +107,7 @@
   outline: none;
   background-color: transparent;
   padding: 0px;
+}
+.nav-item {
+  text-decoration: none;
 }

@@ -25,11 +25,11 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchPostData()
+    console.log('component did mount called')
   }
 
   fetchPostData = async () => {
     const {searchInputHome} = this.state
-    console.log(searchInputHome)
     this.setState({apiStatus: apiStatusConstant.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const apiOptions = {
@@ -38,7 +38,14 @@ class Home extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInputHome}`
+
+    let apiUrl
+    if (searchInputHome === '') {
+      apiUrl = 'https://apis.ccbp.in/insta-share/posts'
+    } else {
+      apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInputHome}`
+    }
+
     const response = await fetch(apiUrl, apiOptions)
     if (response.ok === true) {
       const data = await response.json()
@@ -53,11 +60,11 @@ class Home extends Component {
   }
 
   onClickRetry = () => {
-    this.fetchPostData()
+    this.setState({apiStatus: apiStatusConstant.initial}, this.fetchPostData)
   }
 
   renderPostLoadingView = () => (
-    <div className="loader-container" testid="loader">
+    <div className="loader-container">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
@@ -67,15 +74,17 @@ class Home extends Component {
       <img
         src="https://res.cloudinary.com/dzjf06ctr/image/upload/v1669394593/Group_1_jixbbk.png"
         alt="search not found"
+        className="search-not-found-image"
       />
-      <h1>Search Not Found</h1>
-      <p>Try different keyword or search again</p>
+      <h1 className="search-not-found-header">Search Not Found</h1>
+      <p className="search-not-found-error-msg">
+        Try different keyword or search again
+      </p>
     </>
   )
 
   renderPostSuccess = () => {
     const {postUserData} = this.state
-    console.log(postUserData)
     if (postUserData.length === 0) {
       return this.renderNoSearchResultView()
     }
@@ -131,6 +140,7 @@ class Home extends Component {
   }
 
   onClickSearchIcon = searchInput => {
+    this.setState({apiStatus: apiStatusConstant.initial})
     let searchingStatus
     if (searchInput === '') {
       searchingStatus = false
@@ -152,6 +162,9 @@ class Home extends Component {
           {!isSearching && <ReactSlick />}
         </div>
         <hr className="hr-line" />
+        {isSearching && (
+          <h1 className="search-result-heading">Search Results</h1>
+        )}
         <div className="post-container-1">{this.renderPostViews()}</div>
       </div>
     )

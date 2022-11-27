@@ -81,3 +81,69 @@
   height: 300px;
   text-align: center;
 }
+.search-result-heading {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: left;
+  color: #262626;
+  width: 90%;
+  max-width: 1040px;
+}
+@media screen and (max-width: 767px) {
+  .search-result-heading {
+    display: none;
+  }
+}
+.search-not-found-image {
+  width: 350px;
+  height: 250px;
+}
+@media screen and (max-width: 767px) {
+  .search-not-found-image {
+    width: 186px;
+    height: 133px;
+  }
+}
+.search-not-found-header {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  text-align: center;
+  color: #262626;
+}
+@media screen and (max-width: 767px) {
+  .search-not-found-header {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+    color: #262626;
+  }
+}
+.search-not-found-error-msg {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  text-align: center;
+  color: #989898;
+}
+@media screen and (max-width: 767px) {
+  .search-not-found-error-msg {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #989898;
+  }
+}

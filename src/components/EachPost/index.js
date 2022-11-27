@@ -64,6 +64,7 @@ class EachPost extends Component {
     const response = await fetch(postLikeApi, option)
     if (response.ok === true) {
       const data = await response.json()
+      console.log(data)
       this.setState(prevState => ({
         likeCount: prevState.likeCount - 1,
         isLiked: false,
@@ -73,7 +74,7 @@ class EachPost extends Component {
 
   render() {
     const {eachPost} = this.props
-    console.log(eachPost)
+
     const {
       comments,
       createdAt,
@@ -94,7 +95,7 @@ class EachPost extends Component {
               className="profile-pic"
             />
           </div>
-          <Link to={`/users/${userId}`}>
+          <Link to={`/users/${userId}`} className="nav-item">
             <p className="person-name">{userName}</p>
           </Link>
         </div>
@@ -106,7 +107,7 @@ class EachPost extends Component {
                 className="like-icon"
                 onClick={this.postUnLikeApiCall}
                 type="button"
-                testid="unLikeIcon"
+                // testid="unLikeIcon"
               >
                 <FcLike />
               </button>
@@ -115,7 +116,7 @@ class EachPost extends Component {
                 className="like-icon"
                 onClick={this.postLikeApiCall}
                 type="button"
-                testid="likeIcon"
+                // testid="likeIcon"
               >
                 <BsHeart />
               </button>

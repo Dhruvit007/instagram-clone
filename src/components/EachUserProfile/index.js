@@ -4,7 +4,6 @@ import './index.css'
 
 const EachUserProfile = props => {
   const {myProfileData} = props
-  console.log(myProfileData)
   const {stories, posts} = myProfileData
 
   const renderMyProfileNoPostView = () => (
@@ -46,10 +45,10 @@ const EachUserProfile = props => {
             <p className="about">{myProfileData.user_bio}</p>
           </div>
         </div>
-        {/* <div className="profile-about-sm-view-1">
+        <div className="profile-about-sm-view-1">
           <p className="small-name-1">{myProfileData.user_id}</p>
           <p className="about-1">{myProfileData.user_bio}</p>
-        </div> */}
+        </div>
         <ul className="my-profile-story-item-container">
           {stories.map(eachStory => (
             <li className="profile-story-item" key={eachStory.id}>

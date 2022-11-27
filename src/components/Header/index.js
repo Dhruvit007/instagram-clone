@@ -7,7 +7,7 @@ import {MdCancel} from 'react-icons/md'
 import './index.css'
 
 class Header extends Component {
-  state = {showHumbugger: false, searchInput: ''}
+  state = {showHumbugger: false, searchInput: '', showSearchBar: false}
 
   onClickHumbugger = () => {
     this.setState(prevState => ({showHumbugger: !prevState.showHumbugger}))
@@ -43,41 +43,62 @@ class Header extends Component {
     }
   }
 
+  onClickSearchSm = () => {
+    this.setState(prevState => ({showSearchBar: !prevState.showSearchBar}))
+  }
+
   showMobileNavItems = () => {
-    const {searchInput} = this.state
+    const {showSearchBar, searchInput} = this.state
 
     return (
-      <ul className="nav-items-container-item-mobile">
-        <Link to="/" className="nav-link-mobile">
-          <li>Home</li>
-        </Link>
-        <Link to="/my-profile" className="nav-link-mobile">
-          <li>Profile</li>
-        </Link>
-        <li>
+      <>
+        <ul className="nav-items-container-item-mobile">
+          <Link to="/" className="nav-link-mobile">
+            <li>Home</li>
+          </Link>
+          <li className="nav-link-mobile" onClick={this.onClickSearchSm}>
+            Search
+          </li>
+          <Link to="/my-profile" className="nav-link-mobile">
+            <li>Profile</li>
+          </Link>
+          <li>
+            <button
+              onClick={this.onClickLogout}
+              className="logout-btn"
+              type="button"
+            >
+              Logout
+            </button>
+          </li>
           <button
-            onClick={this.onClickLogout}
-            className="logout-btn"
+            onClick={this.onClickCancelIcon}
             type="button"
+            className="cancel-btn"
           >
-            Logout
+            <MdCancel className="cancel-icon" />
           </button>
-        </li>
-        <input
-          placeholder="Search Caption"
-          className="search-caption"
-          type="search"
-          value={searchInput}
-          onChange={this.onChangeSearchInput}
-        />
-        <button
-          onClick={this.onClickCancelIcon}
-          type="button"
-          className="cancel-btn"
-        >
-          <MdCancel className="cancel-icon" />
-        </button>
-      </ul>
+        </ul>
+        {showSearchBar && (
+          <div className="caption-search-container search-icon-sm">
+            <input
+              placeholder="Search Caption"
+              className="search-caption"
+              type="search"
+              value={searchInput}
+              onChange={this.onChangeSearchInput}
+            />
+            <div className="search-icon-container">
+              <button type="button" className="search-btn">
+                <FaSearch
+                  onClick={this.onClickSearch}
+                  className="search-icon"
+                />
+              </button>
+            </div>
+          </div>
+        )}
+      </>
     )
   }
 
@@ -108,7 +129,7 @@ class Header extends Component {
                 onChange={this.onChangeSearchInput}
               />
               <div className="search-icon-container">
-                <button type="button" testid="searchIcon">
+                <button type="button" className="search-btn">
                   <FaSearch
                     onClick={this.onClickSearch}
                     className="search-icon"
